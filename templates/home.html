@@ -28,6 +28,20 @@
     <body>
         <table>
             <tr>
+                <th>day</th>
+                <th>min</th>
+                <th>max</th>
+            </tr>
+            {% for day in daily_data %}
+            <tr>
+                <td>{{ day[0] }}</td>
+                <td>{{ '%.0f' % day[1] }}</td>
+                <td>{{ '%.0f' %day[2] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <table>
+            <tr>
                 <th>Time</th>
                 <th>Temperature</th>
                 <th>Weather</th>

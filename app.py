@@ -32,25 +32,21 @@ def results():
     description = forecast_list[0]['weather'][0]['description']
     wind_speed = forecast_list[0]['wind']['speed']
     first_time = datetime.fromtimestamp(forecast_list[0]['dt'])
+    daily_min = list([99] * 6)
+    daily_max = list([-99] * 6)
+    daily_name = list([''] * 6)
     for forecast in forecast_list:
-        print(forecast['dt_txt'])
         dt = datetime.fromtimestamp(forecast['dt'])
         forecast['time'] = dt.strftime('%a %d %b, %I %p')
-        forecast['daynumber'] = dt.day - first_time.day
-        print(forecast['main']['temp_min'])
-        print(forecast['main']['temp_max'])
-    my_list = [location, timezone, timestamp, date_time, temp, description, wind_speed]
-    print(my_list)
-
-    # startdictionary
-    weather_dict = {
-        "location": location,
-        "timezone": timezone,
-        "wind_speed": wind_speed,
-        "temp": temp,
-        "timestamp": timestamp
-    }
-    return render_template("home.html", data = location_response, weather_data=my_list, weather_dict=weather_dict)
+        day_number = dt.day - first_time.day
+        forecast['daynumber'] = day_number
+        temp_min = forecast['main']['temp_min']
+        temp_max = forecast['main']['temp_max']
+        daily_min[day_number] = min(daily_min[day_number], temp_min)
+        daily_max[day_number] = max(daily_max[day_number], temp_max)
+        daily_name[day_number] = dt.strftime('%a')
+    daily_data = zip(daily_name, daily_min, daily_max)
+    return render_template("home.html", data = location_response, daily_data = daily_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
