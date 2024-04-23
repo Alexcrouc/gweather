@@ -1,60 +1,8 @@
 <html>
     <head>
-        <title>{{ title }}</title>
-        <style>
-            table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-            }
-
-            td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-            }
-
-            tr:nth-child(even) {
-            background-color: #dddddd;
-            }
-
-            #weather {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-            }
-        </style>
+        <title></title>
     </head>
     <body>
-        <table>
-            <tr>
-                <th>day</th>
-                <th>min</th>
-                <th>max</th>
-            </tr>
-            {% for day in daily_data %}
-            <tr>
-                <td>{{ day[0] }}</td>
-                <td>{{ '%.0f' % day[1] }}</td>
-                <td>{{ '%.0f' %day[2] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        <table>
-            <tr>
-                <th>Time</th>
-                <th>Temperature</th>
-                <th>Weather</th>
-                <th>daynumber</th>
-            </tr>
-            {% for item in data["list"] %}
-                <tr>
-                    <td>{{ item["time"] }}</td>
-                    <td>{{ '%.0f' % item["main"]["temp"] }}°C</td>
-                    <td><div id="weather"><img src="https://openweathermap.org/img/wn/{{ item["weather"][0]["icon"] }}.png"></img> {{ item["weather"][0]["main"] }}</div></td>
-                    <td>{{ item["daynumber"] }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+hey!
     </body>
 </html>

@@ -8,3 +8,7 @@ Print(location_response)
 tmp = location_response.get('list')
 for item in tmp:
     print(item['dt_txt'] + " " + str(item['main']['temp']))
+index = 0
+while index < len(forecast_list):
+    print(forecast_list[index]['dt'])
+    index += 7
