@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weather</title>
+    <style>
+        .inline-block span {
+        display: inline-block;
+            }
+        .inline-block-right span {
+        display: inline-block;
+        width:50%;
+            }
+        .block span {
+        display: block;
+            }
+        .block20 span {
+        display: block;
+        width: 20%;
+            }
+    </style>
+</head>
+
+<body>
+
+    <h2 id="location">Weather for Enfield</h2>
+    <span>
+        <img id="sunny" src="https://openweathermap.org/img/wn/10d@2x.png"></img>
+        <span id="temperature" style="font-size: 100px">20</span>
+        <span class="inline-block">
+            <span class="block">
+                <span id="precip">precipitation</span>
+                <span id="humidity">humidity</span>
+                <span id="wind">wind</span>
+            </span>
+        </span>
+        <span class="inline-block-right" align="right">
+            <span class="block">
+                <span>Weather</span>
+                <span id="day">Monday</span>
+                <span id="main">sunny</span>
+            </span>
+        </span>
+    </span>
+    <div>
+        <button>temperature</button>
+        <button>precipitation</button>
+        <button>wind</button>
+    </div>
+    <div>
+        <canvas style="width: 100%" height="20px"></canvas>
+    </div>
+    <span class="block20">mon</span>
+    <span class="block20">tue</span>
+    <span class="block20">wed</span>
+    <span class="block20">thu</span>
+    <span class="block20">fri</span>
+</body>
+
+</html>
