@@ -6,6 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather</title>
+    <style>
+        .column-20 {
+        width:12%;
+        }
+    </style>
 </head>
 <body>
 
@@ -56,41 +61,19 @@
         <button>wind</button>
     </div>
     <div>
-        <canvas style="width: 100%" height="20px"></canvas>
+        <canvas style="width: 60%" height="20px"></canvas>
     </div>
       </div>
       </div>
       <div class="row">
-        <div class="column">
-            {{ forecast_data[0]['day_name'] }}
-            <img src="{{ forecast_data[0]['icon_url'] }}" >
-            {{ forecast_data[0]['temp'] }}
-            {{ forecast_data[0]['desc'] }}
-        </div>
-        <div class="column">
-            {{ forecast_data[1]['day_name'] }}
-            <img src="{{ forecast_data[1]['icon_url'] }}" >
-            {{ forecast_data[1]['temp'] }}
-            {{ forecast_data[1]['desc'] }}
-        </div>
-        <div class="column">
-            {{ forecast_data[2]['day_name'] }}
-            <img src="{{ forecast_data[2]['icon_url'] }}" >
-            {{ forecast_data[2]['temp'] }}
-            {{ forecast_data[2]['desc'] }}
-        </div>
-        <div class="column">
-            {{ forecast_data[3]['day_name'] }}
-            <img src="{{ forecast_data[3]['icon_url'] }}" >
-            {{ forecast_data[3]['temp'] }}
-            {{ forecast_data[3]['desc'] }}
-        </div>
-        <div class="column">
-            {{ forecast_data[4]['day_name'] }}
-            <img src="{{ forecast_data[4]['icon_url'] }}" >
-            {{ forecast_data[4]['temp'] }}
-            {{ forecast_data[4]['desc'] }}
-        </div>
+          {% for day_item in forecast_data %}
+            <div class="column-20">
+                <p>{{ day_item['day_name'] }}</p>
+                <img src="{{ day_item['icon_url'] }}" >
+                <p>{{ day_item['temp'] }}</p>
+                <p>{{ day_item['desc'] }}</p>
+            </div>
+          {% endfor %}
       <div>
   <canvas id="myChart"></canvas>
 </div>
