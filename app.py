@@ -20,10 +20,10 @@ def forecast():
         city = 'adelaide'
     # make the request
     url = "https://api.openweathermap.org/data/2.5/forecast?q=" + city +"&APPID="+api_key
-    print(url)
+    #print(url)
     response = requests.get(url).json()
     # parse the response
-    print(response)
+    #print(response)
     if response['cod'] == '404':
         return render_template('error.html', city=city)
     city_name = response["city"]["name"]
@@ -37,20 +37,27 @@ def forecast():
         desc = forecast_list[index]['weather'][0]['description']
         date_object = datetime.strptime(dt_txt, '%Y-%m-%d %H:%M:%S')
         day_name = date_object.strftime('%A')
-        print(day_name)
-        dict = {
-            "dt_txt":dt_txt,
-            "day_name":day_name,
-            "temp":math.floor(int(temp)-273),
-            "icon_url":"http://openweathermap.org/img/w/" + icon + ".png",
-            "desc":desc
+        #print(day_name)
+        dict_entry = {
+            "dt_txt": dt_txt,
+            "day_name": day_name,
+            "temp": math.floor(int(temp)-273),
+            "icon_url": "http://openweathermap.org/img/w/" + icon + ".png",
+            "desc": desc
         }
-        forecast_data.append(dict)
+        forecast_data.append(dict_entry)
         index += 8
-    print(forecast_data)
+    #print(forecast_data)
     # return the rendered html, passing in the data
     return render_template('home.html', forecast_data=forecast_data, city_name=city_name)
 
+
+@app.route('/forecast', methods=['POST'])
+def post():
+    err_msg = ''
+    city = request.form.get('city')
+    #print(city)
+    return redirect(url_for('forecast')+'?city='+city)
 
 if __name__ == '__main__':
     app.run(debug=True)
