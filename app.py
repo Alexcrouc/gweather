@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import requests
 from datetime import datetime
 import math
@@ -7,6 +7,11 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
+    return redirect(url_for('forecast'))
+
+
+@app.route('/forecast', methods=['GET'])
+def forecast():
     # api key is how you access the data
     api_key = 'ea68e3d3ed994ec7a7f8dc81ae326d84'
     # get the city if not there then use adelaide
@@ -18,6 +23,9 @@ def index():
     print(url)
     response = requests.get(url).json()
     # parse the response
+    print(response)
+    if response['cod'] == '404':
+        return render_template('error.html', city=city)
     city_name = response["city"]["name"]
     forecast_list = response['list']
     forecast_data = []
